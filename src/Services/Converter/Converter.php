@@ -10,24 +10,26 @@ namespace ConvertFeed\Services\Converter;
 
 
 use ConvertFeed\Factories\FeedFactory;
+use ConvertFeed\Services\Response\AtomMaker;
 use ConvertFeed\Services\Response\ResponseMaker;
 use ConvertFeed\Services\Response\RssMaker;
 
 class Converter
 {
-    const FORMTAT_RSS = 'rss';
-
     private $responseMaker;
     private $feedFactory;
     private $rss;
+    private $atom;
 
     public function __construct(
         ResponseMaker $responseMaker,
         RssMaker $rssMaker,
+        AtomMaker $atomMaker,
         FeedFactory $feedFactory
     ) {
         $this->responseMaker = $responseMaker;
         $this->rss = $rssMaker;
+        $this->atom = $atomMaker;
         $this->feedFactory = $feedFactory;
     }
 
