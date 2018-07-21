@@ -9,21 +9,23 @@
 namespace ConvertFeed\Commands;
 
 
+use ConvertFeed\Factories\FeedFactory;
 use ConvertFeed\Services\Reader\ReaderService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class ReadCommand extends Command
 {
 
     private $readerService;
+    private $feedFactory;
 
-    public function __construct(ReaderService $readerService)
+    public function __construct(ReaderService $readerService, FeedFactory $feedFactory)
     {
         $this->readerService = $readerService;
+        $this->feedFactory = $feedFactory;
         parent::__construct();
     }
 
@@ -42,8 +44,9 @@ class ReadCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $path = $input->getArgument('path');
-        $result = $this->readerService->process($path);
+        $xml = $this->readerService->process($path);
+        $feed = $this->feedFactory->make($xml);
 
-        $output->writeln($result);
+        $output->writeln(print_r($feed, true));
     }
 }

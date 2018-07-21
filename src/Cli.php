@@ -1,4 +1,5 @@
 <?php
+
 namespace ConvertFeed\Cli;
 
 require_once '_bootstrap.php';
