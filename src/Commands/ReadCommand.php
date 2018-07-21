@@ -10,6 +10,7 @@ namespace ConvertFeed\Commands;
 
 
 use ConvertFeed\Factories\FeedFactory;
+use ConvertFeed\Services\Converter\Converter;
 use ConvertFeed\Services\Reader\ReaderService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -20,12 +21,12 @@ class ReadCommand extends Command
 {
 
     private $readerService;
-    private $feedFactory;
+    private $converter;
 
-    public function __construct(ReaderService $readerService, FeedFactory $feedFactory)
+    public function __construct(ReaderService $readerService, Converter $converter)
     {
         $this->readerService = $readerService;
-        $this->feedFactory = $feedFactory;
+        $this->converter = $converter;
         parent::__construct();
     }
 
@@ -38,15 +39,17 @@ class ReadCommand extends Command
                 'path',
                 InputArgument::REQUIRED,
                 'file path'
-            );
+            )->addArgument('format', InputArgument::REQUIRED, 'rss, atom');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $path = $input->getArgument('path');
+        $format = $input->getArgument('format');
         $xml = $this->readerService->process($path);
-        $feed = $this->feedFactory->make($xml);
+        $result = $this->converter->convert($xml, $format);
 
-        $output->writeln(print_r($feed, true));
+        $output->write($result);
+       /// $output->writeln(print_r($feed, true));
     }
 }
