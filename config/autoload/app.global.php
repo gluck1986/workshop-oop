@@ -1,15 +1,20 @@
 <?php
 
+use ConvertFeed\Commands\HelloCommand;
+use ConvertFeed\Commands\ReadCommand;
+use Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
+
 return [
     'dependencies' => [
         'abstract_factories' => [
-            Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory::class,
+           ReflectionBasedAbstractFactory::class,
         ],
         'factories' => [
 
         ],
     ],
     'commands'  => [
-        'hello' => \ConvertFeed\Commands\HelloAction::class
+        'hello' => HelloCommand::class,
+        'read' => ReadCommand::class
     ],
 ];
