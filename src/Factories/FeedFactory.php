@@ -45,8 +45,5 @@ class FeedFactory
         } else {
             return $this->feedAtomFactory->make($simpleXMLElement);
         }
-
-        throw new \Exception('unknown format');
     }
-
 }
