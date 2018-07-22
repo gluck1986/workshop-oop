@@ -14,12 +14,19 @@ use ConvertFeed\Entity\Feed;
 class FeedFactory
 {
     private $feedRssFactory;
+    private $feedAtomFactory;
 
-    public function __construct(FeedRssFactory $feedRssFactory)
+    public function __construct(FeedRssFactory $feedRssFactory, FeedAtomFactory $feedAtomFactory)
     {
         $this->feedRssFactory = $feedRssFactory;
+        $this->feedAtomFactory = $feedAtomFactory;
     }
 
+    /**
+     * @param string $xml
+     * @return Feed
+     * @throws \Exception
+     */
     public function make(string $xml): Feed
     {
         $element = new \SimpleXMLElement($xml);
@@ -27,13 +34,19 @@ class FeedFactory
         return $this->makeFeed($element);
     }
 
+    /**
+     * @param \SimpleXMLElement $simpleXMLElement
+     * @return Feed
+     * @throws \Exception
+     */
     private function makeFeed(\SimpleXMLElement $simpleXMLElement): Feed
     {
-        try {
+        if (property_exists($simpleXMLElement, 'channel')) {
             return $this->feedRssFactory->make($simpleXMLElement->channel);
-        } catch (\Exception $exception) {
-
+        } else {
+            return $this->feedAtomFactory->make($simpleXMLElement);
         }
+
         throw new \Exception('unknown format');
     }
 

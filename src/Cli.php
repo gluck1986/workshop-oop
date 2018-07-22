@@ -13,6 +13,7 @@ $container = require_once dirname(__DIR__) . DIRECTORY_SEPARATOR
 $application = new Application('Application console');
 
 $commands = $container->get('config')['commands'];
+
 foreach ($commands as $command) {
     $application->add($container->get($command));
 }

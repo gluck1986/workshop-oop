@@ -10,7 +10,9 @@ return [
            ReflectionBasedAbstractFactory::class,
         ],
         'factories' => [
-
+            \ConvertFeed\MainConverter::class => function (\Psr\Container\ContainerInterface $container) {
+                return new \ConvertFeed\MainConverter($container);
+            }
         ],
     ],
     'commands'  => [

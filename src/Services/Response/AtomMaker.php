@@ -21,19 +21,34 @@ class AtomMaker
         );
 
         $chanel = $simpleXml;
-        $chanel->addChild('title', $feed->title);
-        $chanel->addChild('subtitle', $feed->subTitle);
-        $chanel->addChild('id', $feed->id);
+        if ($feed->title) {
+            $chanel->addChild('title', $feed->title);
+        }
+        if ($feed->subTitle) {
+            $chanel->addChild('subtitle', $feed->subTitle);
+        }
+        if ($feed->id) {
+            $chanel->addChild('id', $feed->id);
+        }
         foreach ($feed->items as $item) {
             /** @var Item $item */
             $xmlItem = $chanel->addChild('entry');
-            $xmlItem->addChild('title', $item->title);
-            $xmlItem->addChild('content', $item->content ?? $item->description);
-            $xmlItem->addChild('link', $item->link);
-            $xmlItem->addChild('updated', $item->updated);
-            $xmlItem->addChild('id', $item->id);
+            if ($item->title) {
+                $xmlItem->addChild('title', $item->title);
+            }
+            if ($item->content || $item->description) {
+                $xmlItem->addChild('content', $item->content ?? $item->description);
+            }
+            if ($item->link) {
+                $xmlItem->addChild('link', $item->link);
+            }
+            if ($item->updated) {
+                $xmlItem->addChild('updated', $item->updated);
+            }
+            if ($item->id) {
+                $xmlItem->addChild('id', $item->id);
+            }
         }
-
         return $simpleXml->asXML();
     }
 }

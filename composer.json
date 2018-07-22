@@ -14,16 +14,13 @@
     "phpunit": "phpunit"
   },
   "bin": [
-    "bin/run"
+    "bin/convert"
   ],
   "autoload": {
     "psr-4": {
       "ConvertFeed\\": "src",
       "ConvertFeed\\Tests\\": "tests"
-    },
-    "files": [
-      "src\\Cli.php"
-    ]
+    }
   },
   "require": {
     "php": ">=7.2.0",
@@ -33,5 +30,9 @@
     "zendframework/zend-servicemanager": "^3.3",
     "zendframework/zend-config-aggregator": "^1.1",
     "guzzlehttp/guzzle": "^6.3"
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "^7.2"
   }
 }
