@@ -18,7 +18,6 @@ class AtomSerializer
         $simpleXml = new \SimpleXMLElement(
             '<?xml version="1.0" encoding="UTF-8" ?><feed xmlns="http://www.w3.org/2005/Atom"></feed>'
         );
-
         $chanel = $simpleXml;
         if ($feed->title) {
             $chanel->addChild('title', $feed->title);

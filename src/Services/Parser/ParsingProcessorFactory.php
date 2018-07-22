@@ -8,7 +8,6 @@
 
 namespace ConvertFeed\Services\Parser;
 
-
 class ParsingProcessorFactory
 {
     public function factory($xml)

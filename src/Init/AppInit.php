@@ -39,7 +39,7 @@ class AppInit
     private function getConfig(): array
     {
         $path = implode(
-            DIRECTORY_SEPARATOR,
+            '/',
             [dirname(dirname(__DIR__)), 'config', '{{,*.}global,{,*.}local}.php']
         );
         $aggregator = new ConfigAggregator([
@@ -48,5 +48,4 @@ class AppInit
 
         return $aggregator->getMergedConfig();
     }
-
 }
