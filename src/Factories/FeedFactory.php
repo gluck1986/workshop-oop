@@ -8,7 +8,6 @@
 
 namespace ConvertFeed\Factories;
 
-
 use ConvertFeed\Entity\Feed;
 
 class FeedFactory
@@ -49,6 +48,5 @@ class FeedFactory
 
         throw new \Exception('unknown format');
     }
-
 
 }

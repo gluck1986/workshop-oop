@@ -8,7 +8,6 @@
 
 namespace ConvertFeed\Factories;
 
-
 use ConvertFeed\Entity\Feed;
 use ConvertFeed\Entity\Item;
 
@@ -33,8 +32,8 @@ class FeedRssFactory
         foreach ($itemsData as $itemData) {
             $item = new Item();
             $item->title = property_exists($itemData, 'title') ? $itemData->title->__toString() : null;
-            $item->description = property_exists($itemData,
-                'description') ? $itemData->description->__toString() : null;
+            $item->description = property_exists($itemData, 'description')
+                ? $itemData->description->__toString() : null;
             $item->link = property_exists($itemData, 'link') ? $itemData->link->__toString() : null;
             $item->updated = property_exists($itemData, 'pubDate') ? $itemData->pubDate->__toString() : null;
             $item->id = property_exists($itemData, 'guid') ? $itemData->guid->__toString() : null;

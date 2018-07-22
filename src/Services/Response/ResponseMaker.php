@@ -8,7 +8,6 @@
 
 namespace ConvertFeed\Services\Response;
 
-
 use ConvertFeed\Entity\Feed;
 
 class ResponseMaker

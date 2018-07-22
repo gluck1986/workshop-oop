@@ -8,7 +8,6 @@
 
 namespace ConvertFeed\Services\Converter;
 
-
 use ConvertFeed\Factories\FeedFactory;
 use ConvertFeed\Services\Response\AtomMaker;
 use ConvertFeed\Services\Response\ResponseMaker;
@@ -33,6 +32,12 @@ class Converter
         $this->feedFactory = $feedFactory;
     }
 
+    /**
+     * @param string $xml
+     * @param string $format
+     * @return string
+     * @throws \Exception
+     */
     public function convert(string $xml, string $format): string
     {
         $feed = $this->feedFactory->make($xml);

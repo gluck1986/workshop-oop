@@ -8,7 +8,6 @@
 
 namespace ConvertFeed\Services\Reader;
 
-
 use GuzzleHttp\Client;
 
 class ReaderService

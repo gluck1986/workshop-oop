@@ -8,7 +8,6 @@
 
 namespace ConvertFeed\Entity;
 
-
 class Item
 {
     public $title;
