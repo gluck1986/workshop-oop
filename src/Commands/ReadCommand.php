@@ -8,7 +8,7 @@
 
 namespace ConvertFeed\Commands;
 
-use ConvertFeed\MainConverter;
+use ConvertFeed\RssConverter;
 use ConvertFeed\Services\Reader\ReaderService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,7 +21,7 @@ class ReadCommand extends Command
     private $readerService;
     private $converter;
 
-    public function __construct(ReaderService $readerService, MainConverter $converter)
+    public function __construct(ReaderService $readerService, RssConverter $converter)
     {
         $this->readerService = $readerService;
         $this->converter = $converter;

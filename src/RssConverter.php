@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 use Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
 use Zend\ServiceManager\ServiceManager;
 
-class MainConverter
+class RssConverter
 {
     private $container;
 

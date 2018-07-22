@@ -8,28 +8,28 @@
 
 namespace ConvertFeed\Services\Converter;
 
-use ConvertFeed\Factories\FeedFactory;
-use ConvertFeed\Services\Response\AtomMaker;
-use ConvertFeed\Services\Response\ResponseMaker;
-use ConvertFeed\Services\Response\RssMaker;
+use ConvertFeed\Services\Parser\ParsingProcessorFactory;
+use ConvertFeed\Services\XmlSerialize\AtomSerializer;
+use ConvertFeed\Services\XmlSerialize\RssSerializer;
+use ConvertFeed\Services\XmlSerialize\XmlSerializer;
 
 class Converter
 {
     private $responseMaker;
-    private $feedFactory;
-    private $rss;
+    private $parsingProcessorFactory;
     private $atom;
+    private $rss;
 
     public function __construct(
-        ResponseMaker $responseMaker,
-        RssMaker $rssMaker,
-        AtomMaker $atomMaker,
-        FeedFactory $feedFactory
+        XmlSerializer $responseMaker,
+        ParsingProcessorFactory $parsingProcessorFactory,
+        RssSerializer $rssMaker,
+        AtomSerializer $atomMaker
     ) {
         $this->responseMaker = $responseMaker;
-        $this->rss = $rssMaker;
+        $this->parsingProcessorFactory = $parsingProcessorFactory;
         $this->atom = $atomMaker;
-        $this->feedFactory = $feedFactory;
+        $this->rss = $rssMaker;
     }
 
     /**
@@ -40,7 +40,8 @@ class Converter
      */
     public function convert(string $xml, string $format): string
     {
-        $feed = $this->feedFactory->make($xml);
+        $parsingProcessor = $this->parsingProcessorFactory->factory($xml);
+        $feed = $parsingProcessor->parse($xml);
 
         return $this->responseMaker->make($this->{$format}, $feed);
     }

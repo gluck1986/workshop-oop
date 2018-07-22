@@ -1,4 +1,9 @@
 #!/usr/bin/env php
 
 <?php
-require_once __DIR__ . '/../src/Cli.php';
+
+use ConvertFeed\Init\AppInit;
+
+require_once dirname(__DIR__) . '/src/_bootstrap.php';
+
+(new AppInit())->getApplication()->run();

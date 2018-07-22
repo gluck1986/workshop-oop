@@ -6,17 +6,17 @@
  * Time: 14:55
  */
 
-namespace ConvertFeed\Factories;
+namespace ConvertFeed\Services\Parser;
 
 use ConvertFeed\Entity\Feed;
 use ConvertFeed\Entity\Item;
 
-class FeedRssFactory
+class RssParser implements Parser
 {
-    public function make(\SimpleXMLElement $data): Feed
+    public function parse(\SimpleXMLElement $XMLElement): Feed
     {
         $feed = new Feed();
-
+        $data = $XMLElement->channel;
         $feed->title = property_exists($data, 'title') ? $data->title->__toString() : '';
         $feed->subTitle = property_exists($data, 'description') ? $data->description->__toString() : '';
         if (property_exists($data, 'item')) {
@@ -28,13 +28,12 @@ class FeedRssFactory
     private function makeItems($itemsData): array
     {
         $result = [];
-
         foreach ($itemsData as $itemData) {
             $item = new Item();
-            $item->title = property_exists($itemData, 'title') ? $itemData->title->__toString() : null;
+            $item->title = $itemData->title->__toString();
             $item->description = property_exists($itemData, 'description')
                 ? $itemData->description->__toString() : null;
-            $item->link = property_exists($itemData, 'link') ? $itemData->link->__toString() : null;
+            $item->link = $itemData->link->__toString();
             $item->updated = property_exists($itemData, 'pubDate') ? $itemData->pubDate->__toString() : null;
             $item->id = property_exists($itemData, 'guid') ? $itemData->guid->__toString() : null;
 

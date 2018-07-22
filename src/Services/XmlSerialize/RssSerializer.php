@@ -6,12 +6,12 @@
  * Time: 19:05
  */
 
-namespace ConvertFeed\Services\Response;
+namespace ConvertFeed\Services\XmlSerialize;
 
 use ConvertFeed\Entity\Feed;
 use ConvertFeed\Entity\Item;
 
-class RssMaker
+class RssSerializer
 {
     public function make(Feed $feed): string
     {

@@ -8,7 +8,7 @@
 
 namespace ConvertFeed\Tests;
 
-use ConvertFeed\MainConverter;
+use ConvertFeed\RssConverter;
 use PHPUnit\Framework\TestCase;
 
 class ConvertTest extends TestCase
@@ -49,7 +49,7 @@ class ConvertTest extends TestCase
 
     public function testConvertRssToAtom()
     {
-        $convert = new MainConverter();
+        $convert = new RssConverter();
 
         $result = $convert->convert($this->getRssXml(), 'atom');
 
@@ -58,7 +58,7 @@ class ConvertTest extends TestCase
 
     public function testConvertAtomToRss()
     {
-        $convert = new MainConverter();
+        $convert = new RssConverter();
 
         $result = $convert->convert($this->getAtomXml(), 'rss');
 
